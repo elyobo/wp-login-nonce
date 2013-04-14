@@ -69,7 +69,7 @@ call_user_func(function () {
             }
 
             $nonce = isset($_POST[$nonceName]) ? $_POST[$nonceName] : false;
-            if (!($user && $nonce && wp_verify_nonce($nonce, $nonceAction))) {
+            if (!($user || ($nonce && wp_verify_nonce($nonce, $nonceAction)))) {
                 // Disable normal password authentication
                 remove_action('authenticate',
                     'wp_authenticate_username_password', 20);
